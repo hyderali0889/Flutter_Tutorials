@@ -1,0 +1,29 @@
+name: obj_box
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  objectbox: ^1.6.0
+  objectbox_flutter_libs: any
+  local_auth: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.0.0
+  objectbox_generator: any
+
+flutter:
+  uses-material-design: true
