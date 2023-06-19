@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_basics/Container/Repositories/auth_repository.dart';
 
 import '../../Container/Pods/home_pods.dart';
 import '../Routes/routes.dart';
@@ -28,9 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, ref, child) {
             String text = ref.watch(bingoProvider) ?? "";
 
+            var auth = ref.watch(authRepoProvider);
+
             return Column(
               children: [
-                Text("Home $text"),
+                Text("Home $text ${FirebaseAuth.instance.currentUser!.uid}"),
                 TextButton(
                     onPressed: () {
                       ref
@@ -41,14 +45,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextButton(
                     onPressed: () {
                       context.pushNamed(Routes().second,
-                          pathParameters: {"dat": text });
+                          pathParameters: {"dat": text});
                     },
                     child: const Text("Go to Sec")),
                 TextButton(
                     onPressed: () {
                       context.pushNamed(Routes().future);
                     },
-                    child: const Text("Go to Future"))
+                    child: const Text("Go to Future")),
+                TextButton(
+                    onPressed: () {
+                      auth.singOut();
+                      context.goNamed(Routes().login);
+                    },
+                    child: const Text("LogOut"))
               ],
             );
           },

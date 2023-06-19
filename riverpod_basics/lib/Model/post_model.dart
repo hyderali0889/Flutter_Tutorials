@@ -84,7 +84,7 @@ class PostRepository {
 
     for (var dat in data.data) {
       PostModel model =
-          PostModel(dat["userId"], dat["id"], dat["title"], dat["body"]);
+          PostModel.fromJson(dat);
       posts.add(model);
     }
 
